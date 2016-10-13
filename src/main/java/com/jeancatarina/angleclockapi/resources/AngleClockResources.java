@@ -1,5 +1,8 @@
 package com.jeancatarina.angleclockapi.resources;
 
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,9 +13,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/{hour}", produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
+@RequestMapping(value = "rest/clock/{hour}", produces = { MediaType.APPLICATION_JSON_VALUE}, headers = "Accept=application/json")
 public class AngleClockResources {
 	
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> getAngleHour(@PathVariable("hour") Integer hour){
@@ -20,7 +24,7 @@ public class AngleClockResources {
 		return getAngle(hour, 00);
 	}
 
-	@RequestMapping(value = "/{minutes}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE})
+	@RequestMapping(value = "/{minutes}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE}, headers = "Accept=application/json")
 	@ResponseBody
 	public ResponseEntity<?> getAngleHourMinutes(@PathVariable Integer hour, @PathVariable Integer minutes){
 				
@@ -33,7 +37,7 @@ public class AngleClockResources {
 		String finalAngle;
 		int angleMinutes;
 		double angleHours;
-		double lowerAngle;	
+		double lowerAngle;
 		
 		if((hour < 0 || hour > 23) || (minutes < 0 || minutes > 59)){
 			return ResponseEntity.badRequest().body("Please, enter a valid time! " + hour + " hours and " + minutes + " minutes is not valid");		
@@ -57,8 +61,10 @@ public class AngleClockResources {
 		
 		finalAngle = "{\"angle\":" + String.format("%.0f", lowerAngle) + "}\n";
 		
+		/* Result Cache */
+		CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.MINUTES);
 		
-		return ResponseEntity.status(HttpStatus.OK).body(finalAngle);
+		return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(finalAngle);
 		
 	}
 	

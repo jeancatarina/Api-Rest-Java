@@ -1,4 +1,4 @@
-/*package com.jeancatarina.angleclockapi.domain;
+package com.jeancatarina.angleclockapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -33,6 +33,9 @@ public class AngleClock {
 		this.minutes = minutes;
 	}
 	
+	public int getAngleMinute(int minute) {
+		return (minute%60)*6;
+	}
+		
 
 }
-*/
