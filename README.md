@@ -13,6 +13,6 @@ Java 1.8 and Maven.
 
 3 - mvn spring-boot:run
 
-4 - Open another cmd and write $ <b>Curl http://localhost:8080/rest/clock/6/0 </b>
+4 - Open <b>another</b> cmd and write $ <b>Curl http://localhost:8080/rest/clock/6/0 </b>
 
 5 - Response should be {"angle":180}
