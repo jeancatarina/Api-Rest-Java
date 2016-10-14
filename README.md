@@ -9,8 +9,10 @@ Java 1.8 and Maven.
 
 1 - git clone https://github.com/jeancatarina/Api-Rest-Java.git
 
-2 - mvn spring-boot:run
+2 - cd Api-Rest-Java\
 
-3 - Open another cmd and write $ <b>Curl http://localhost:8080/rest/clock/6/0 </b>
+3 - mvn spring-boot:run
 
-4 - Response should be {"angle":180}
+4 - Open another cmd and write $ <b>Curl http://localhost:8080/rest/clock/6/0 </b>
+
+5 - Response should be {"angle":180}
